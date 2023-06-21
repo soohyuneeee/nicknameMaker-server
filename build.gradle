@@ -6,6 +6,8 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.8.21'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.8.21'
     id 'org.jetbrains.kotlin.plugin.jpa' version '1.8.21'
+    id "org.jetbrains.kotlin.plugin.allopen" version "1.8.22"
+
 }
 
 group = 'nickname.maker'
@@ -45,11 +47,8 @@ tasks.withType(KotlinCompile) {
     }
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
-}
 allOpen {
-    annotation("javax.persistence.Entity")
-    annotation("javax.persistence.MappedSuperclass")
-    annotation("javax.persistence.Embeddable")
+    annotation("jakarta.persistence.Entity")
+    annotation("jakarta.persistence.MappedSuperclass")
+    annotation("jakarta.persistence.Embeddable")
 }
