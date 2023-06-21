@@ -29,6 +29,7 @@ logging:
 
 jwt:
   access-token-valid-time: ${jwt.access-token-valid-time}
+  refresh-token-valid-time: ${jwt.refresh-token-valid-time}
   prefix: Bearer
   header: Authorization
   secret-key: ${jwt.secret-key}
