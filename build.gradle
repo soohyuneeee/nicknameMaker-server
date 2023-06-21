@@ -38,6 +38,7 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     implementation("io.springfox:springfox-boot-starter:3.0.0")
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 }
 
 tasks.withType(KotlinCompile) {
