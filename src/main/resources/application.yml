@@ -1,4 +1,6 @@
 spring:
+  config:
+    import: classpath:/env.yml
   profiles:
     active: local
   mvc:
@@ -26,7 +28,7 @@ logging:
     org.springframework.transaction: DEBUG
 
 jwt:
-  access-token-valid-time: ${JWT_ACCESS_TIME}
+  access-token-valid-time: ${jwt.access-token-valid-time}
   prefix: Bearer
   header: Authorization
-  secret-key: ${JWT_SECRET}
+  secret-key: ${jwt.secret-key}
