@@ -6,6 +6,8 @@ import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys
 import jakarta.servlet.http.HttpServletRequest
+import nickname.maker.server.domain.auth.domain.RefreshToken
+import nickname.maker.server.domain.auth.domain.repository.RefreshTokenRepository
 import nickname.maker.server.global.config.properties.JwtProperties
 import nickname.maker.server.global.security.jwt.exception.ExpiredTokenException
 import nickname.maker.server.global.security.jwt.exception.InvalidTokenException
@@ -15,11 +17,20 @@ import java.util.*
 
 @Component
 class JwtTokenProvider(
-        val jwtProperties: JwtProperties,
+    val jwtProperties: JwtProperties,
+    val refreshTokenRepository: RefreshTokenRepository
 ) {
 
     fun createAccessToken(email: String): String {
         return createToken(email, jwtProperties.accessTokenValidTime);
+    }
+
+    fun createRefreshToken(email: String): String {
+        val token = createToken(email, jwtProperties.refreshTokenValidTime)
+        refreshTokenRepository.save(
+            RefreshToken(token = token, email = email)
+        )
+        return token
     }
 
     private fun createToken(email: String, time: Long): String {
@@ -28,11 +39,11 @@ class JwtTokenProvider(
         val now = Date()
 
         return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(now)
-                .setExpiration(Date(now.time + time))
-                .signWith(getSigningKey(jwtProperties.secretKey), SignatureAlgorithm.HS256)
-                .compact()
+            .setClaims(claims)
+            .setIssuedAt(now)
+            .setExpiration(Date(now.time + time))
+            .signWith(getSigningKey(jwtProperties.secretKey), SignatureAlgorithm.HS256)
+            .compact()
     }
 
     private fun getSigningKey(secretKey: String): Key {
@@ -42,15 +53,15 @@ class JwtTokenProvider(
 
     fun getEmail(token: String): String {
         return extractAllClaims(token)
-                .get("email", String::class.java)
+            .get("email", String::class.java)
     }
 
     private fun extractAllClaims(token: String): Claims {
         try {
             return Jwts.parserBuilder()
-                    .setSigningKey(getSigningKey(jwtProperties.secretKey))
-                    .build()
-                    .parseClaimsJws(token).body
+                .setSigningKey(getSigningKey(jwtProperties.secretKey))
+                .build()
+                .parseClaimsJws(token).body
         } catch (e: ExpiredJwtException) {
             throw ExpiredTokenException.EXCEPTION
         } catch (e: Exception) {
