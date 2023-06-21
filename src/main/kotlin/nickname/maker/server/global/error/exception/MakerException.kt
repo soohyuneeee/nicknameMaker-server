@@ -1,9 +1,8 @@
 package nickname.maker.server.global.error.exception
 
+import nickname.maker.server.domain.user.exception.error.UserErrorProperty
 
-open class MakerException(
-        val errorCode: ErrorCode,
-        message: String,
-) : RuntimeException(message) {
-    constructor(errorCode: ErrorCode) : this(errorCode, errorCode.message)
+
+open class MakerException(private val errorProperty: ErrorProperty) : RuntimeException() {
+    fun getErrorProperty(): ErrorProperty = errorProperty
 }
