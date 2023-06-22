@@ -65,8 +65,9 @@ class SecurityConfig(
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-            .requestMatchers("/").permitAll()
-            .requestMatchers(HttpMethod.GET, "/product/**").permitAll()
+            .requestMatchers(HttpMethod.POST,"/swagger-ui/*").permitAll()
+            .requestMatchers(HttpMethod.POST, "/login").permitAll()
+            .requestMatchers(HttpMethod.POST, "/signup").permitAll()
             .anyRequest().authenticated()
             .and()
             .formLogin().disable();

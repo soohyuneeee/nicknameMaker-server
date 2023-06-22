@@ -1,5 +1,6 @@
 package nickname.maker.server.domain.auth.service
 
+import jakarta.transaction.Transactional
 import nickname.maker.server.domain.auth.presentation.dto.request.LoginRequest
 import nickname.maker.server.domain.auth.presentation.dto.response.TokenResponse
 import nickname.maker.server.domain.user.exception.PasswordMismatchException
@@ -14,6 +15,7 @@ class LoginService(
     private val jwtTokenProvider: JwtTokenProvider,
     private val passwordEncoder: PasswordEncoder
 ) {
+    @Transactional
     fun execute(request: LoginRequest): TokenResponse {
         val user = userFacade.findUserByEmail(request.userId)
         checkPassword(request.password, user.password)
@@ -28,7 +30,7 @@ class LoginService(
 
     fun checkPassword(password: String, encodedPassword: String) {
         if (!passwordEncoder.matches(password, encodedPassword)) {
-            throw PasswordMismatchException.EXCEPTION
+            throw PasswordMismatchException()
         }
     }
 }
