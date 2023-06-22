@@ -21,21 +21,21 @@ class JwtTokenProvider(
     val refreshTokenRepository: RefreshTokenRepository
 ) {
 
-    fun createAccessToken(email: String): String {
-        return createToken(email, jwtProperties.accessTokenValidTime);
+    fun createAccessToken(userId: String): String {
+        return createToken(userId, jwtProperties.accessTokenValidTime);
     }
 
-    fun createRefreshToken(email: String): String {
-        val token = createToken(email, jwtProperties.refreshTokenValidTime)
+    fun createRefreshToken(userId: String): String {
+        val token = createToken(userId, jwtProperties.refreshTokenValidTime)
         refreshTokenRepository.save(
-            RefreshToken(token = token, email = email)
+            RefreshToken(token = token, email = userId)
         )
         return token
     }
 
-    private fun createToken(email: String, time: Long): String {
+    private fun createToken(userId: String, time: Long): String {
         val claims = Jwts.claims()
-        claims["email"] = email
+        claims["userId"] = userId
         val now = Date()
 
         return Jwts.builder()
@@ -53,7 +53,7 @@ class JwtTokenProvider(
 
     fun getEmail(token: String): String {
         return extractAllClaims(token)
-            .get("email", String::class.java)
+            .get("userId", String::class.java)
     }
 
     private fun extractAllClaims(token: String): Claims {

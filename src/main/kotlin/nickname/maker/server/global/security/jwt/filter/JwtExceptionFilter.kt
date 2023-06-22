@@ -12,7 +12,7 @@ import org.springframework.web.filter.OncePerRequestFilter
 import java.io.IOException
 
 class JwtExceptionFilter(
-        private val mapper: ObjectMapper
+    private val mapper: ObjectMapper
 ) : OncePerRequestFilter() {
 
     @Throws(ServletException::class, IOException::class)
@@ -29,8 +29,7 @@ class JwtExceptionFilter(
         res.status = HttpStatus.UNAUTHORIZED.value()
         res.contentType = "application/json; charset=UTF-8"
         val errorResponse: ErrorResponse = ErrorResponse(
-                status = e.errorCode.status,
-                message = e.errorCode.message
+            e.errorCode
         )
         res.writer.write(mapper.writeValueAsString(errorResponse))
     }
