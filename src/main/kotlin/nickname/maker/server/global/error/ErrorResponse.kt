@@ -3,9 +3,12 @@ package nickname.maker.server.global.error
 import nickname.maker.server.global.error.exception.ErrorCode
 import org.springframework.http.HttpStatus
 
-class ErrorResponse(
-        val status: HttpStatus,
-        val message: String,
-) {
-    constructor(errorCode: ErrorCode): this(errorCode.status, errorCode.message)
+class ErrorResponse(errorCode: ErrorCode) {
+    val status: HttpStatus
+    val message: String
+
+    init {
+        status = errorCode.status
+        message = errorCode.message
+    }
 }
