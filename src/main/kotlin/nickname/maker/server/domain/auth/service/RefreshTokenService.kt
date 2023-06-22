@@ -1,5 +1,6 @@
 package nickname.maker.server.domain.auth.service
 
+import jakarta.transaction.Transactional
 import nickname.maker.server.domain.auth.domain.RefreshToken
 import nickname.maker.server.domain.auth.domain.repository.RefreshTokenRepository
 import nickname.maker.server.domain.auth.presentation.dto.response.AccessTokenResponse
@@ -18,6 +19,7 @@ class RefreshTokenService(
         return AccessTokenResponse(accessToken)
     }
 
+    @Transactional
     private fun getRefreshToken(token: String): RefreshToken {
         return refreshTokenRepository.findById(token)
             .orElseThrow { ExpiredTokenException.EXCEPTION }
