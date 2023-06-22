@@ -1,4 +1,6 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
   config:
     import: classpath:/env.yml
   profiles:
@@ -12,14 +14,18 @@ spring:
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
-
   jpa:
     database: mysql
     show-sql: true
     generate-ddl: true
     hibernate:
       ddl-auto: update
-
+  cache:
+    type: redis
+  data:
+    redis:
+      host: localhost
+      port: 6379
 debug: true
 
 logging:
