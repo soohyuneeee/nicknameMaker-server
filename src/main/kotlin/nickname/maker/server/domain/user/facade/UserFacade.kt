@@ -26,7 +26,7 @@ class UserFacade(
     }
 
     @Transactional
-    fun checkUserId(email: String?) {
-        if (userRepository.existsUserByEmail(email)) throw UserAlreadyExistsException()
+    fun checkUserId(userId: String?) {
+        if (userRepository.existsUserByEmail(userId)) throw UserAlreadyExistsException()
     }
 }
