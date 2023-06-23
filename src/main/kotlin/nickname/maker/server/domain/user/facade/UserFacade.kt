@@ -15,7 +15,7 @@ class UserFacade(
 ) {
     @Transactional
     fun findUserByUserId(userId: String): User {
-        return userRepository.findUserByEmail(userId)
+        return userRepository.findUserByUserId(userId)
             ?: throw UserNotFoundException()
     }
 
@@ -27,6 +27,6 @@ class UserFacade(
 
     @Transactional
     fun checkUserId(userId: String?) {
-        if (userRepository.existsUserByEmail(userId)) throw UserAlreadyExistsException()
+        if (userRepository.existsUserByUserId(userId)) throw UserAlreadyExistsException()
     }
 }
