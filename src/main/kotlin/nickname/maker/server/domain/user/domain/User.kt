@@ -7,7 +7,7 @@ import nickname.maker.server.global.entity.BaseTimeEntity
 @Table(name = "tbl_user")
 class User(
     @Column(length = 50, nullable = false, unique = true)
-    var email: String,
+    var userId: String,
 
     @Column(length = 60, nullable = false)
     var password: String,
@@ -19,6 +19,6 @@ class User(
     @Column
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
-): BaseTimeEntity() {
+) : BaseTimeEntity() {
 
 }

@@ -14,8 +14,8 @@ class UserFacade(
     val userRepository: UserRepository,
 ) {
     @Transactional
-    fun findUserByEmail(email: String): User {
-        return userRepository.findUserByEmail(email)
+    fun findUserByUserId(userId: String): User {
+        return userRepository.findUserByEmail(userId)
             ?: throw UserNotFoundException()
     }
 

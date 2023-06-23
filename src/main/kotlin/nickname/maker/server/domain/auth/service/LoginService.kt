@@ -17,12 +17,12 @@ class LoginService(
 ) {
     @Transactional
     fun execute(request: LoginRequest): TokenResponse {
-        val user = userFacade.findUserByEmail(request.userId)
+        val user = userFacade.findUserByUserId(request.userId)
         checkPassword(request.password, user.password)
         return TokenResponse(
-            jwtTokenProvider.createAccessToken(user.email),
-            jwtTokenProvider.createRefreshToken(user.email),
-            user.email,
+            jwtTokenProvider.createAccessToken(user.userId),
+            jwtTokenProvider.createRefreshToken(user.userId),
+            user.userId,
             user.nickname
         )
 
