@@ -19,7 +19,7 @@ class SignupService(
         userFacade.checkUserId(request.userId)
         userRepository.save(
             User(
-                email = request.userId,
+                userId = request.userId,
                 password = passwordEncoder.encode(request.password),
                 nickname = request.nickname
             )
