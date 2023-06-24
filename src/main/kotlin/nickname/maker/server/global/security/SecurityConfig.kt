@@ -68,6 +68,7 @@ class SecurityConfig(
             .requestMatchers(HttpMethod.POST,"/swagger-ui/*").permitAll()
             .requestMatchers(HttpMethod.POST, "/login").permitAll()
             .requestMatchers(HttpMethod.POST, "/signup").permitAll()
+            .requestMatchers(HttpMethod.GET, "/like").permitAll()
             .anyRequest().authenticated()
             .and()
             .formLogin().disable();
