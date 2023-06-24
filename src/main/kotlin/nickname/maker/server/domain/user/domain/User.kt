@@ -1,6 +1,7 @@
 package nickname.maker.server.domain.user.domain
 
 import jakarta.persistence.*
+import nickname.maker.server.domain.keyword.domain.KeyWord
 import nickname.maker.server.domain.like.domain.Like
 import nickname.maker.server.global.entity.BaseTimeEntity
 
@@ -18,6 +19,9 @@ class User(
 
     @OneToMany(mappedBy = "user")
     var likes: MutableList<Like> = mutableListOf(),
+
+    @OneToMany(mappedBy = "author")
+    var keywords: MutableList<KeyWord> = mutableListOf(),
 
     @Column
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
