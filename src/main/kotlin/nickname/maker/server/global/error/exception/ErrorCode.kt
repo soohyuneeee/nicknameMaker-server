@@ -16,6 +16,7 @@ enum class ErrorCode(
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "사용자가 없습니다."),
     PASSWORD_MISMATCH(HttpStatus.UNAUTHORIZED, "비밀번호가 틀렸습니다."),
     LIKE_ALREADY_EXISTS(HttpStatus.UNPROCESSABLE_ENTITY, "이미 좋아요를 눌렀습니다."),
+    LIKE_NOT_FOUND(HttpStatus.NOT_FOUND, "좋아요를 누르지 않았습니다."),
 
 
 }
