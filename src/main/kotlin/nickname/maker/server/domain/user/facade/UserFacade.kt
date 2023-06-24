@@ -20,7 +20,7 @@ class UserFacade(
     }
 
     @Transactional
-    fun getCurrentUser(): User? {
+    fun getCurrentUser(): User {
         val auth = SecurityContextHolder.getContext().authentication.principal as AuthDetails
         return auth.user
     }
