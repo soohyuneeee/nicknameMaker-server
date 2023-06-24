@@ -5,5 +5,6 @@ import java.time.LocalDateTime
 data class LikeResponse(
     val id: Long?,
     val sentence: String,
-    val createdAt: LocalDateTime?
+    val createdAt: LocalDateTime?,
+    val author: String
 )

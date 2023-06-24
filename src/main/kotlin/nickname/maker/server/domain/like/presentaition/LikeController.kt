@@ -2,7 +2,7 @@ package nickname.maker.server.domain.like.presentaition
 
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
-import nickname.maker.server.domain.like.presentaition.dto.response.MyLikeListResponse
+import nickname.maker.server.domain.like.presentaition.dto.response.LikeListResponse
 import nickname.maker.server.domain.like.service.CreateLikeService
 import nickname.maker.server.domain.like.service.DeleteLikeService
 import nickname.maker.server.domain.like.service.GetMyLikeService
@@ -29,7 +29,7 @@ class LikeController(
     }
     @Operation(summary = "좋아요 조회")
     @GetMapping("")
-    fun getLike():MyLikeListResponse {
+    fun getLike():LikeListResponse {
         return getMyLikeService.execute()
     }
 
