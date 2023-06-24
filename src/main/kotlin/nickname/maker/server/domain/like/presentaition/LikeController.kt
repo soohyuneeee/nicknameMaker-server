@@ -27,9 +27,16 @@ class LikeController(
     fun deleteLike(@PathVariable id: Long) {
         deleteLikeService.execute(id)
     }
+
     @Operation(summary = "좋아요 조회")
-    @GetMapping("")
-    fun getLike():LikeListResponse {
+    @GetMapping("/my")
+    fun geMytLike(): LikeListResponse {
+        return getMyLikeService.execute()
+    }
+
+    @Operation(summary = "사람들의 좋아요 조회")
+    @GetMapping
+    fun getLike(): LikeListResponse {
         return getMyLikeService.execute()
     }
 

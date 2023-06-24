@@ -6,5 +6,5 @@ data class LikeResponse(
     val id: Long?,
     val sentence: String,
     val createdAt: LocalDateTime?,
-    val author: String
+    val author: String?
 )
